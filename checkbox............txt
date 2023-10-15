@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="codedost.checkbox.MainActivity">
+
+    <CheckBox
+        android:text="Paneer Makahani (Rs 325)"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="21sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="61dp"
+        android:id="@+id/checkBox1" />
+
+    <CheckBox
+        android:text="Roomali Roti (Rs 80)"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/checkBox1"
+        android:layout_marginTop="36dp"
+        android:textSize="21sp"
+        android:id="@+id/checkBox2" />
+
+    <CheckBox
+        android:text="PATNE RICE (Rs 500)"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/checkBox2"
+        android:layout_marginTop="42dp"
+        android:textSize="21sp"
+        android:id="@+id/checkBox3" />
+
+    <Button
+        android:text="PLACE ORDER"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/checkBox3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="78dp"
+        android:id="@+id/button" />
+</RelativeLayout>
+
+
+MainActivity
+
+
+package com.example.checkbox_widget;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+
+    CheckBox cb1,cb2,cb3;
+    Button bOrder;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        cb1=(CheckBox) findViewById(R.id.checkBox1);
+        cb2=(CheckBox) findViewById(R.id.checkBox2);
+        cb3=(CheckBox) findViewById(R.id.checkBox3);
+        bOrder=(Button) findViewById(R.id.button);
+
+
+        bOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StringBuffer cost= new StringBuffer();
+                int amount=0;
+                if(cb1.isChecked())
+                {
+                    cost.append("\nPaneer Makahani (Rs 325)");
+                    amount+=325;
+                }
+                if(cb2.isChecked())
+                {
+                    cost.append("\nRoomali Roti (Rs 80)");
+                    amount+=80;
+                }
+                if(cb3.isChecked())
+                {
+                    cost.append("\nPATNE RICE (Rs 500)\n");
+                    amount+=500;
+                }
+
+                cost.append("\n\nTotal cost = Rs"+amount);
+                String r=cost.toString();
+                Toast.makeText(getApplicationContext(),"Total Amount = "+amount+"/-",Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+}

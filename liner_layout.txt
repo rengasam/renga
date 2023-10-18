@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity" >
+
+    <TextView
+        android:text="RED"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#f00"
+        android:layout_weight=".14"
+        android:gravity="center"
+        android:textColor="#000"
+        />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="ORANGE"
+        android:background="#ffa500"
+        android:layout_weight=".14"
+        android:gravity="center"
+        android:textColor="#000"/>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="YELLOW"
+        android:background="#ffff00"
+        android:layout_weight=".14"
+        android:gravity="center"
+        android:textColor="#000"/>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="GREEN"
+        android:background="#0f0"
+        android:layout_weight=".15"
+        android:gravity="center"
+        android:textColor="#000"/>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="BLUE"
+        android:background="#00f"
+        android:layout_weight=".14"
+        android:gravity="center"
+        android:textColor="#000"/>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="INDIGO"
+        android:background="#4b0082"
+        android:layout_weight=".15"
+        android:gravity="center"
+        android:textColor="#000"/>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="VIOLET"
+        android:background="#ee82ee"
+        android:layout_weight=".14"
+        android:gravity="center"
+        android:textColor="#000"/>
+
+</LinearLayout>

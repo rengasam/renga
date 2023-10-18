@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/editTextAmount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Amount"
+        android:inputType="numberDecimal"/>
+
+    <RadioGroup
+        android:id="@+id/radioGroupGST"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextAmount"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/radioButtonInclusive"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Inclusive"/>
+
+        <RadioButton
+            android:id="@+id/radioButtonExclusive"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Exclusive"/>
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/buttonCalculate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/radioGroupGST"
+        android:layout_marginTop="16dp"
+        android:text="Calculate"/>
+
+    <TextView
+        android:id="@+id/textViewResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonCalculate"
+        android:layout_marginTop="16dp"
+        android:text="Result: "
+        android:textSize="18sp"/>
+
+</RelativeLayout>
+
+
+MainActivity
+
+
+package com.example.gst_calculate;
+
+import android.annotation.SuppressLint;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
+
+public class MainActivity extends AppCompatActivity {
+
+    private EditText editTextAmount;
+    private RadioGroup radioGroupGST;
+    private Button buttonCalculate;
+    private TextView textViewResult;
+
+    @SuppressLint("MissingInflatedId")
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        editTextAmount = findViewById(R.id.editTextAmount);
+        radioGroupGST = findViewById(R.id.radioGroupGST);
+        buttonCalculate = findViewById(R.id.buttonCalculate);
+        textViewResult = findViewById(R.id.textViewResult);
+
+        buttonCalculate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calculateGST();
+            }
+        });
+    }
+
+    private void calculateGST() {
+        double amount = 0;
+
+        try {
+            amount = Double.parseDouble(editTextAmount.getText().toString());
+        } catch (NumberFormatException e) {
+            editTextAmount.setError("Enter a valid amount");
+            return;
+        }
+
+        RadioButton selectedRadioButton = findViewById(radioGroupGST.getCheckedRadioButtonId());
+        String gstType = selectedRadioButton.getText().toString();
+        double gstPercentage = gstType.equals("Inclusive") ? 7.0 : 7.0 / 107.0 * 100.0;
+
+        double gstAmount = amount * (gstPercentage / 100);
+        double totalAmount = amount + gstAmount;
+
+        String result = "GST Amount: " + String.format("%.2f", gstAmount) + "\nTotal Amount: " + String.format("%.2f", totalAmount);
+        textViewResult.setText(result);
+    }
+}

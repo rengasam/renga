@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TableLayout
+        android:id="@+id/tableLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <!-- Table rows will be added dynamically -->
+    </TableLayout>
+
+    <EditText
+        android:id="@+id/editTextName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Name"/>
+
+    <EditText
+        android:id="@+id/editTextDepartment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Department"/>
+
+    <EditText
+        android:id="@+id/editTextDegree"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Degree"/>
+
+    <EditText
+        android:id="@+id/editTextUniversity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="University"/>
+
+    <Button
+        android:id="@+id/buttonAdd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Student Detail"/>
+
+</LinearLayout>
+
+MainActivity
+
+
+package com.example.table_layout;
+
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
+
+public class MainActivity extends AppCompatActivity {
+
+    private TableLayout tableLayout;
+    private EditText editTextName;
+    private EditText editTextDepartment;
+    private EditText editTextDegree;
+    private EditText editTextUniversity;
+    private Button buttonAdd;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        tableLayout = findViewById(R.id.tableLayout);
+        editTextName = findViewById(R.id.editTextName);
+        editTextDepartment = findViewById(R.id.editTextDepartment);
+        editTextDegree = findViewById(R.id.editTextDegree);
+        editTextUniversity = findViewById(R.id.editTextUniversity);
+        buttonAdd = findViewById(R.id.buttonAdd);
+
+        buttonAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addStudentDetails(
+                        editTextName.getText().toString(),
+                        editTextDepartment.getText().toString(),
+                        editTextDegree.getText().toString(),
+                        editTextUniversity.getText().toString()
+                );
+
+                // Clear the input fields after adding a detail
+                editTextName.setText("");
+                editTextDepartment.setText("");
+                editTextDegree.setText("");
+                editTextUniversity.setText("");
+            }
+        });
+    }
+
+    private void addStudentDetails(String name, String department, String degree, String university) {
+        TableRow row = new TableRow(this);
+        TableRow.LayoutParams params = new TableRow.LayoutParams(
+                TableRow.LayoutParams.MATCH_PARENT,
+                TableRow.LayoutParams.WRAP_CONTENT
+        );
+        row.setLayoutParams(params);
+
+        TextView nameTextView = new TextView(this);
+        nameTextView.setText("Name: " + name);
+        nameTextView.setPadding(10, 10, 10, 10);
+        nameTextView.setGravity(Gravity.START);
+
+        TextView departmentTextView = new TextView(this);
+        departmentTextView.setText("Department: " + department);
+        departmentTextView.setPadding(10, 10, 10, 10);
+        departmentTextView.setGravity(Gravity.START);
+
+        TextView degreeTextView = new TextView(this);
+        degreeTextView.setText("Degree: " + degree);
+        degreeTextView.setPadding(10, 10, 10, 10);
+        degreeTextView.setGravity(Gravity.START);
+
+        TextView universityTextView = new TextView(this);
+        universityTextView.setText("University: " + university);
+        universityTextView.setPadding(10, 10, 10, 10);
+        universityTextView.setGravity(Gravity.START);
+
+        row.addView(nameTextView);
+        row.addView(departmentTextView);
+        row.addView(degreeTextView);
+        row.addView(universityTextView);
+
+        tableLayout.addView(row);
+    }
+}
